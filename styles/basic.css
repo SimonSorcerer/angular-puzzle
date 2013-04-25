@@ -1,0 +1,53 @@
+.piece {
+    float: left;
+    width: 70px;
+    height: 70px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.container {
+    width: 500px;
+}
+
+.controls {
+    margin-bottom: 18px;
+    margin-top: 18px;
+}
+
+.piece-1 {
+    background-color: #000;
+}
+
+.piece-1:hover {
+    background-color: #666;
+}
+
+.piece-0 {
+    background-color: #FFF;
+}
+
+.piece-0:hover {
+    background-color: #CCC;
+}
+
+.board {
+    border: 3px solid Black;
+    margin-bottom: 18px;
+}
+
+.board-2 {
+    max-width: 160px;
+}
+
+.board-3 {
+    max-width: 240px;
+}
+
+.board-4 {
+    max-width: 320px;
+}
+
+.board-5 {
+    max-width: 400px;
+}

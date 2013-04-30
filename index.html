@@ -28,6 +28,14 @@
             <div class="alert alert-success" ng-show="finished()">Game Finished!</div>
         </div>
     </div>
+
+    <div class="container" ng-controller="NumberCtrl">
+        <div class="row board board-{{size}}" ng-init="randomize()">
+            <div ng-repeat="piece in board">
+                <div class="piece piece-number" ng-click="pieceClick($index)">{{piece.value}}</div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

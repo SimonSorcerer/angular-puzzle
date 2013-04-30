@@ -31,6 +31,16 @@
     background-color: #CCC;
 }
 
+.piece-number {
+    line-height: 70px;
+    font-size: 2em;
+    text-align: center;
+}
+
+.piece-number:hover {
+    background-color: #DEDEDE;
+}
+
 .board {
     border: 3px solid Black;
     margin-bottom: 18px;

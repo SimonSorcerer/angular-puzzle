@@ -1,3 +1,47 @@
+function NumberCtrl($scope, $timeout) {
+    $scope.size = 3;
+    $scope.board = [];
+    $scope.counter = 0;
+
+    $scope.boardMax = function () {
+        return $scope.size * $scope.size;
+    }
+
+    $scope.init = function () {
+        $scope.board = [];
+
+        for (var i = 0; i < $scope.boardMax(); i++) {
+            $scope.board.push({ value: i });
+        }
+    }
+
+    $scope.randomize = function () {
+        if (!$scope.initialized()) {
+            $scope.init();
+        }
+        fisherYates($scope.board);
+    }
+
+
+    $scope.initialized = function() {
+        return ($scope.board.length == $scope.size * $scope.size);
+    }
+
+
+    var fisherYates = function (arr) {
+        var i = arr.length;
+        if ( i == 0 ) return false;
+        while ( --i ) {
+            var j = Math.floor( Math.random() * ( i + 1 ) );
+            var tempi = arr[i];
+            var tempj = arr[j];
+            arr[i] = tempj;
+            arr[j] = tempi;
+        }
+    }
+}
+
+
 function PuzzleCtrl($scope, $timeout) {
     $scope.size = 3;
     $scope.board = [];
@@ -16,7 +60,7 @@ function PuzzleCtrl($scope, $timeout) {
         var val = 0;
 
         for (var i = 0; i < $scope.boardMax(); i++) {
-            val = Math.floor((Math.random() * 2));
+            val = Math.floor(Math.random() * 2);
             $scope.board.push({ value: val });
         }
     }

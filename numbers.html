@@ -1,0 +1,17 @@
+    <div class="row btn-group controls">
+        <button ng-click="randomize()" class="btn btn-danger">Reset</button>
+        <button ng-click="addSize(1)" class="btn"><i class="icon-plus"></i></button>
+        <button class="btn disabled">Difficulty: {{size}}</button>
+        <button ng-click="addSize(-1)" class="btn"><i class="icon-minus"></i></button>
+    </div>
+
+    <div class="row board board-{{size}}" ng-init="randomize()">
+        <div ng-repeat="piece in board">
+            <div class="piece" ng-click="pieceClick($index)">{{piece.value}}</div>
+        </div>
+    </div>
+
+    <div class="row status-bar">
+        <div class="alert alert-info" ng-hide="finished()">Time: {{counter | number}} seconds</div>
+        <div class="alert alert-success" ng-show="finished()">Game Finished!</div>
+    </div>

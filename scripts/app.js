@@ -23,10 +23,40 @@ function NumberCtrl($scope, $timeout) {
     }
 
 
+    $scope.pieceClick = function (pos) {
+        if (pos < $scope.boardMax() && pieceMovable(pos)) {
+            $scope.board[zeroPosition($scope.board)].value = $scope.board[pos].value;
+            $scope.board[pos].value = 0;
+        }
+    }
+
+
+    var zeroPosition = function (arr) {
+        for(var pos = 0; pos < arr.length; pos++) {
+            if (arr[pos].value === 0) {
+                return pos;
+            }
+        }
+    }
+
+
+    var pieceMovable = function (pos) {
+        return pieceEmpty(pos - 1) ||
+             pieceEmpty(pos + 1) ||
+             pieceEmpty(addRow(pos, -1)) ||
+             pieceEmpty(addRow(pos, 1));
+    }
+
+    var pieceEmpty = function (pos) {
+        return (pos >= 0 &&
+            pos < $scope.boardMax() &&
+            $scope.board[pos].value === 0);
+    }
+
+
     $scope.initialized = function() {
         return ($scope.board.length == $scope.size * $scope.size);
     }
-
 
     var fisherYates = function (arr) {
         var i = arr.length;
@@ -38,6 +68,10 @@ function NumberCtrl($scope, $timeout) {
             arr[i] = tempj;
             arr[j] = tempi;
         }
+    }
+
+    var addRow = function(pos, count) {
+        return pos + (count * $scope.size);
     }
 }
 

@@ -4,6 +4,9 @@
     <title>Angular Test Puzzle</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
     <script src="scripts/app.js"></script>
+    <script src="scripts/helpers/arrayHelpers.js"></script>
+    <script src="scripts/controllers/number.js"></script>
+    <script src="scripts/controllers/tile.js"></script>
     <link href="styles/bootstrap.css" rel="stylesheet">
     <link href="styles/basic.css" rel="stylesheet">
 </head>
@@ -32,7 +35,7 @@
     <div class="container" ng-controller="NumberCtrl">
         <div class="row board board-{{size}}" ng-init="randomize()">
             <div ng-repeat="piece in board">
-                <div class="piece piece-number" ng-click="pieceClick($index)">{{piece.value}}</div>
+                <div class="piece piece-number piece-number-{{piece.value}}" ng-click="pieceClick($index)"><span ng-hide="pieceEmpty($index)">{{piece.value}}</span></div>
             </div>
         </div>
     </div>

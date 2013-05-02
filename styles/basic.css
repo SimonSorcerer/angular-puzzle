@@ -32,9 +32,18 @@
 }
 
 .piece-number {
+    width: 66px;
+    height: 66px;
     line-height: 70px;
     font-size: 2em;
     text-align: center;
+    border: 2px solid #222;
+}
+
+.piece-number-0 {
+    border: 2px solid #FFF;
+    color: #FFF;
+    content: "";
 }
 
 .piece-number:hover {

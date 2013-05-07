@@ -38,6 +38,9 @@
     font-size: 2em;
     text-align: center;
     border: 2px solid #222;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
 }
 
 .piece-number-0 {
@@ -52,7 +55,7 @@
 
 .board {
     border: 3px solid Black;
-    margin-bottom: 18px;
+    margin-bottom: 4px;
 }
 
 .board-2 {

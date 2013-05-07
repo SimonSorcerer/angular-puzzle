@@ -3,7 +3,6 @@ function PuzzleCtrl($scope, $timeout) {
     $scope.board = [];
     $scope.counter = 0;
 
-
     $scope.boardMax = function () {
         return $scope.size * $scope.size;
     }
@@ -17,6 +16,7 @@ function PuzzleCtrl($scope, $timeout) {
     $scope.randomize = function () {
         $scope.board = [];
         var val = 0;
+        $scope.counter = 0;
 
         for (var i = 0; i < $scope.boardMax(); i++) {
             val = Math.floor(Math.random() * 2);
@@ -30,9 +30,7 @@ function PuzzleCtrl($scope, $timeout) {
         myTimeout = $timeout($scope.onTimeout, 1000);
     }
 
-
     var myTimeout = $timeout($scope.onTimeout, 1000);
-
 
     $scope.stop = function() {
         $timeout.cancel(myTimeout);
@@ -44,8 +42,8 @@ function PuzzleCtrl($scope, $timeout) {
             pieceTurn(pos);
             pieceTurn(pos - 1, pos);
             pieceTurn(pos + 1, pos);
-            pieceTurn(arrayHelpers.addRow($scope.size, pos, -1), pos);
-            pieceTurn(arrayHelpers.addRow($scope.size, pos, 1), pos);
+            pieceTurn(arrayHelper.addRow($scope.size, pos, -1), pos);
+            pieceTurn(arrayHelper.addRow($scope.size, pos, 1), pos);
         }
     }
 
@@ -73,7 +71,7 @@ function PuzzleCtrl($scope, $timeout) {
 
 
     var pieceTurn = function (pos, originalPos) {
-        if (originalPos === undefined || arrayHelpers.onCross($scope.size, pos, originalPos)) {
+        if (originalPos === undefined || arrayHelper.onCross($scope.size, pos, originalPos)) {
             var max = $scope.boardMax();
 
             if (pos >= 0 && pos < max) {

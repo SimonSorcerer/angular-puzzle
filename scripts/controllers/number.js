@@ -17,11 +17,30 @@ function NumberCtrl($scope, $timeout) {
     }
 
 
+    $scope.finished = function () {
+        if ($scope.board.length < 9) {
+            return false;
+        }
+
+        var result = true;
+
+        for (var i = 0; i <= 7; i++) {
+            if ($scope.board[i].value !=  i + 1) {
+                result = false;
+            }
+        }
+
+        return result;
+    }
+
+
     $scope.randomize = function () {
         if (!$scope.initialized()) {
             $scope.init();
         }
-        fisherYates($scope.board);
+        $scope.counter = 0;
+
+        arrayHelper.fisherYates($scope.board);
     }
 
 
@@ -31,6 +50,7 @@ function NumberCtrl($scope, $timeout) {
             $scope.board[pos].value = 0;
         }
     }
+
 
     $scope.pieceEmpty = function (pos) {
         return $scope.board[pos].value == 0;
@@ -49,8 +69,8 @@ function NumberCtrl($scope, $timeout) {
     var pieceMovable = function (pos) {
         return pieceEmpty(pos - 1) ||
             pieceEmpty(pos + 1) ||
-            pieceEmpty(arrayHelpers.addRow($scope.size, pos, -1)) ||
-            pieceEmpty(arrayHelpers.addRow($scope.size, pos, 1));
+            pieceEmpty(arrayHelper.addRow($scope.size, pos, -1)) ||
+            pieceEmpty(arrayHelper.addRow($scope.size, pos, 1));
     }
 
 
@@ -65,17 +85,14 @@ function NumberCtrl($scope, $timeout) {
         return ($scope.board.length == $scope.size * $scope.size);
     }
 
-
-    var fisherYates = function (arr) {
-        var i = arr.length;
-        if ( i == 0 ) return false;
-        while ( --i ) {
-            var j = Math.floor( Math.random() * ( i + 1 ) );
-            var tempi = arr[i];
-            var tempj = arr[j];
-            arr[i] = tempj;
-            arr[j] = tempi;
-        }
+    $scope.onTimeout = function(){
+        $scope.counter ++;
+        myTimeout = $timeout($scope.onTimeout, 1000);
     }
 
+    var myTimeout = $timeout($scope.onTimeout, 1000);
+
+    $scope.stop = function() {
+        $timeout.cancel(myTimeout);
+    }
 }

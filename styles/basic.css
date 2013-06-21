@@ -49,6 +49,11 @@
     content: "";
 }
 
+.piece-number-0:hover {
+     background-color: white;
+     cursor: initial;
+}
+
 .piece-number:hover {
     background-color: #DEDEDE;
 }

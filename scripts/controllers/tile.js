@@ -1,17 +1,17 @@
 function PuzzleCtrl($scope, $timeout) {
+    var myTimeout = $timeout($scope.onTimeout, 1000);
+
     $scope.size = 3;
     $scope.board = [];
     $scope.counter = 0;
 
     $scope.boardMax = function () {
         return $scope.size * $scope.size;
-    }
-
+    };
 
     $scope.setSize = function (val) {
         $scope.size = val;
-    }
-
+    };
 
     $scope.randomize = function () {
         $scope.board = [];
@@ -22,20 +22,26 @@ function PuzzleCtrl($scope, $timeout) {
             val = Math.floor(Math.random() * 2);
             $scope.board.push({ value: val });
         }
-    }
-
+    };
 
     $scope.onTimeout = function(){
         $scope.counter ++;
         myTimeout = $timeout($scope.onTimeout, 1000);
-    }
+    };
 
-    var myTimeout = $timeout($scope.onTimeout, 1000);
+    function pieceTurn(pos, originalPos) {
+        if (originalPos === undefined || arrayHelper.onCross($scope.size, pos, originalPos)) {
+            var max = $scope.boardMax();
+
+            if (pos >= 0 && pos < max) {
+                $scope.board[pos].value = 1 - $scope.board[pos].value;
+            }
+        }
+    }
 
     $scope.stop = function() {
         $timeout.cancel(myTimeout);
-    }
-
+    };
 
     $scope.pieceClick = function (pos) {
         if (!$scope.finished()) {
@@ -45,15 +51,13 @@ function PuzzleCtrl($scope, $timeout) {
             pieceTurn(arrayHelper.addRow($scope.size, pos, -1), pos);
             pieceTurn(arrayHelper.addRow($scope.size, pos, 1), pos);
         }
-    }
-
+    };
 
     $scope.finished = function () {
         return !$scope.board.some(function (element) {
             return element.value == 0;
         });
-    }
-
+    };
 
     $scope.addSize = function (count) {
         $scope.size += count;
@@ -67,17 +71,6 @@ function PuzzleCtrl($scope, $timeout) {
         else {
             $scope.randomize();
         }
-    }
-
-
-    var pieceTurn = function (pos, originalPos) {
-        if (originalPos === undefined || arrayHelper.onCross($scope.size, pos, originalPos)) {
-            var max = $scope.boardMax();
-
-            if (pos >= 0 && pos < max) {
-                $scope.board[pos].value = 1 - $scope.board[pos].value;
-            }
-        }
-    }
+    };
 
 }

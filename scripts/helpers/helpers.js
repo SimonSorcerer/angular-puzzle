@@ -10,20 +10,12 @@ var arrayHelper = {
 
 
     onSameLine: function(arrSize, pos1, pos2) {
-        if (Math.floor(pos1 / arrSize) == Math.floor(pos2 / arrSize)) {
-            return true;
-        }
-
-        return false;
+        return Math.floor(pos1 / arrSize) == Math.floor(pos2 / arrSize);
     },
 
 
     onSameColumn: function(arrSize, pos1, pos2) {
-        if ((pos1 % arrSize) == (pos2 % arrSize)) {
-            return true;
-        }
-
-        return false;
+        return (pos1 % arrSize) == (pos2 % arrSize);
     },
 
     fisherYates: function (arr) {
@@ -31,13 +23,12 @@ var arrayHelper = {
         if ( i == 0 ) return false;
         while ( --i ) {
             var j = Math.floor( Math.random() * ( i + 1 ) );
-            var tempi = arr[i];
-            var tempj = arr[j];
-            arr[i] = tempj;
-            arr[j] = tempi;
+            var temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
         }
     }
-}
+};
 
 
 var timerHelper = {
@@ -61,4 +52,4 @@ var timerHelper = {
     stop: function($timeout) {
         $timeout.cancel(timerHelper.myTimeout);
     }
-}
+};
